@@ -11,3 +11,6 @@ tqdm like MATLAB progress bar.
 git clone https://github.com/JAAdrian/MatlabProgressBar.git
 ```
 Add the MatlabProgressBar installation directory to the MATLAB search path.
+
+# Examples
+- `estimate_pos.m`: Estimate position and receiver clock using `PseudorangeFactor_XC`

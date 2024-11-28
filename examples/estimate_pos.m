@@ -1,5 +1,7 @@
-clear
-close all
+%% estimate_pos.m
+% Estimate position and clock using PseudorangeFactor_XC
+% Author: Taro Suzuki
+clear; close all;
 
 %% Path
 if ispc
