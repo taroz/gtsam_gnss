@@ -1,0 +1,8 @@
+build*/*
+
+# VSCODE
+.vscode/
+
+# Development
+.dev/
+
