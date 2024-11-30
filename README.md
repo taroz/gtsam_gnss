@@ -10,9 +10,9 @@ This repository is currently under development, so we will gradually add content
 # Build
 ## GTSAM
 - [GTSAM](https://github.com/borglab/gtsam):
-Factor graph optimization library. Due to a problem with the MATLAB wrapper, please clone (GTSAM from my repository)[https://github.com/taroz/gtsam-4.3a] instead of the original GTSAM and build it using the following procedure.
+Factor graph optimization library. Due to a problem with the MATLAB wrapper, please clone [GTSAM from my repository](https://github.com/taroz/gtsam-4.3a] instead of the original GTSAM and build it using the following procedure.
 ```shell
-sudo apt-get install -y git build-essential cmake libboost-all-dev libtbb-dev
+sudo apt-get install -y git build-essential cmake libboost-all-dev libtbb-dev python3-pip
 pip install pyparsing
 git clone https://github.com/taroz/gtsam-4.3a.git
 cd gtsam-4.3a
@@ -34,6 +34,11 @@ sudo make install
 ```
 By default, `gtsam_gnss` is installed in `user/local/gtsam_toolbox`.
 Add `user/local/gtsam_toolbox` to your MATLAB search path.
+
+Due to the linker issue shown [here](https://github.com/borglab/gtsam/blob/develop/matlab/README.md), you need to run the following shell line before starting MATLAB from the same shell.
+```shell
+export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
+```
 
 # Build on Windows
 Building GTSAM and gtsam_gnss on Windows is a little complicated. The procedure is shown [here](./BUILD_WINDOWS.md).
