@@ -12,5 +12,11 @@ git clone https://github.com/JAAdrian/MatlabProgressBar.git
 ```
 Add the MatlabProgressBar installation directory to the MATLAB search path.
 
+- Due to the linker issue shown [here](https://github.com/borglab/gtsam/blob/develop/matlab/README.md), you need to run the following shell line before starting MATLAB from the same shell.
+```shell
+export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
+matlab
+```
+
 # Examples
 - `estimate_pos.m`: Estimate position and receiver clock using `PseudorangeFactor_XC`

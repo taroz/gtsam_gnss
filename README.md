@@ -1,16 +1,16 @@
 # gtsam_gnss
 This repository is a small set of custom factors and MATLAB wrappers that use [GTSAM](https://github.com/borglab/gtsam) for GNSS processing. 
 
-This repository is currently under development, so we will gradually add content.
+<u>This repository is currently under development</u>, so we will gradually add content.
 
 # Test environments
-- Ubuntu 22.04
+- Ubuntu 22.04 / Windows 11
 - MATLAB 2024a
 
-# Build
+# Build on Ubuntu 22.04
 ## GTSAM
 - [GTSAM](https://github.com/borglab/gtsam):
-Factor graph optimization library. Due to a problem with the MATLAB wrapper, please clone [GTSAM from my repository](https://github.com/taroz/gtsam-4.3a] instead of the original GTSAM and build it using the following procedure.
+Factor graph optimization library. Due to a problem with the MATLAB wrapper, please clone [GTSAM from my repository](https://github.com/taroz/gtsam-4.3a) instead of the original GTSAM and build it using the following procedure.
 ```shell
 sudo apt-get install -y git build-essential cmake libboost-all-dev libtbb-dev python3-pip
 pip install pyparsing
@@ -35,12 +35,7 @@ sudo make install
 By default, `gtsam_gnss` is installed in `user/local/gtsam_toolbox`.
 Add `user/local/gtsam_toolbox` to your MATLAB search path.
 
-Due to the linker issue shown [here](https://github.com/borglab/gtsam/blob/develop/matlab/README.md), you need to run the following shell line before starting MATLAB from the same shell.
-```shell
-export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
-```
-
-# Build on Windows
+# Build on Windows 11
 Building GTSAM and gtsam_gnss on Windows is a little complicated. The procedure is shown [here](./BUILD_WINDOWS.md).
 
 # Examples
