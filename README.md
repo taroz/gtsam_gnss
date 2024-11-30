@@ -43,4 +43,6 @@ Building GTSAM and gtsam_gnss on Windows is a little complicated. The procedure 
 - Use in the Google Smartphone Decimeter Challenge. See [gsdc2023](../gsdc2023) repository
 
 # Citation
+```
 T. Suzuki, "Open-Source Factor Graph Optimization Package for GNSS: Examples and Applications," 2025 IEEE/ION Position, Location and Navigation Symposium (PLANS), (accepted)
+```
