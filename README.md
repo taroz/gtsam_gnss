@@ -40,7 +40,7 @@ Building GTSAM and gtsam_gnss on Windows is a little complicated. The procedure 
 
 # Examples
 - See [examples](./examples) directory
-- Use in the Google Smartphone Decimeter Challenge. See [gsdc2023](../gsdc2023) repository
+- Use in the Google Smartphone Decimeter Challenge. See [gsdc2023](https://github.com/taroz/gsdc2023) repository
 
 # Citation
 ```
