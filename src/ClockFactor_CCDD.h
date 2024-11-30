@@ -49,8 +49,8 @@ public:
     error << (c2[0] - c1[0]) - ((d1[0] + d2[0]) * dt_ / 2);
 
     // Jacobian
-    if (Hc1) *Hc1 = (gtsam::Matrix(1, 7) << 1, 0, 0, 0, 0, 0, 0).finished();
-    if (Hc2) *Hc2 = (gtsam::Matrix(1, 7) << -1, 0, 0, 0, 0, 0, 0).finished();
+    if (Hc1) *Hc1 = (gtsam::Matrix(1, 7) << -1, 0, 0, 0, 0, 0, 0).finished();
+    if (Hc2) *Hc2 = (gtsam::Matrix(1, 7) << 1, 0, 0, 0, 0, 0, 0).finished();
     if (Hd1) *Hd1 = (gtsam::Matrix(1, 1) << -dt_ / 2).finished();
     if (Hd2) *Hd2 = (gtsam::Matrix(1, 1) << -dt_ / 2).finished();
 
