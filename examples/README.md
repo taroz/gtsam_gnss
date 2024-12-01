@@ -17,6 +17,10 @@ Add the MatlabProgressBar installation directory to the MATLAB search path.
 export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
 matlab
 ```
-
+- Before running MATLAB script, please check that the following two paths have been added to the MATLAB search path.
+```shell
+/path/to/MatRTKLIB
+/path/to/MatlabProgressBar
+```
 # Examples
 - `estimate_pos.m`: Estimate position and receiver clock using `PseudorangeFactor_XC`

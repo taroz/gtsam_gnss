@@ -31,6 +31,7 @@ mkdir build && cd build
 cmake ..
 make
 sudo make install
+sudo ldconfig
 ```
 By default, `gtsam_gnss` is installed in `user/local/gtsam_toolbox`.
 Add `user/local/gtsam_toolbox` to your MATLAB search path.
