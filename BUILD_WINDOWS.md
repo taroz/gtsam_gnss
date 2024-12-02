@@ -20,7 +20,7 @@ pip install pyparsing
       - [`boost_1_86_0-msvc-14.3-64.exe`](https://sourceforge.net/projects/boost/files/boost-binaries/1.86.0/boost_1_86_0-msvc-14.3-64.exe)
 2. Install Boost to any directory
 3. Add the following path to the Windows environment variable
-`Boost_DIR` : `path-to-install\boost_1_86_0`
+`BOOST_ROOT` : `path-to-install\boost_1_86_0`
 
 ## Build GTSAM
 1. Clone or download [gtsam-4.3a](https://github.com/taroz/gtsam-4.3a)
