@@ -4,7 +4,7 @@ This repository is a small set of custom factors and MATLAB wrappers that use [G
 <u>This repository is currently under development</u>, so we will gradually add content.
 
 # Test environments
-- Ubuntu 22.04 / Windows 11
+- Ubuntu 22.04 / Windows 11 /macOS
 - MATLAB 2024a
 
 # Build on Ubuntu 22.04
@@ -38,6 +38,9 @@ Add `user/local/gtsam_toolbox` to your MATLAB search path.
 
 # Build on Windows 11
 Building GTSAM and gtsam_gnss on Windows is a little complicated. The procedure is shown [here](./BUILD_WINDOWS.md).
+
+# Build on macOS
+The procedure for building GTSAM and gtsam_gnss on macOS is shown [here](./BUILD_macOS.md).
 
 # Examples
 - See [examples](./examples) directory
