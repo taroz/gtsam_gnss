@@ -25,12 +25,12 @@ public:
   /**
    * @brief Constructor
    * @param keyX    3D position (X) key, X has 3 dimension
-   * @param keyC    Receiver clock (C) key, C has 7 dimension
+   * @param keyC    Receiver clock (C) key, C has Nc dimension
    * @param losvec  Line-of-Sight vector (3 dimension)
    * @param pr      Pseudorange residual at initial 3D position (1 dimension)
-   * @param sysidx  GNSS system index for estimating receiver clock and ISB, starting from 0 up to 6 (e.g. GPS:0, GLONASS:1, Galileo:2)
+   * @param sysidx  GNSS system index for estimating receiver clock and ISB
    * @param inix    Initial 3D position when calculating residual (3 dimension)
-   * @param model   Gaussian noise model (3 dimension)
+   * @param model   Gaussian noise model (1 dimension)
    */
   PseudorangeFactor_XC(gtsam::Key keyX,
                        gtsam::Key keyC,
@@ -50,8 +50,9 @@ public:
                               gtsam::OptionalMatrixType Hx,
                               gtsam::OptionalMatrixType Hc) const override {
     // Estimate receiver clock + inter system bias(ISB)
-    gtsam::Vector7 hc;
-    hc << 1, 0, 0, 0, 0, 0, 0;
+    size_t nc = c.size();
+    gtsam::Vector hc = gtsam::Vector::Zero(nc);
+    hc(0) = 1;
     hc(sysidx_) = 1;
 
     // Compute error
@@ -60,7 +61,7 @@ public:
 
     // Jacobian
     if (Hx) *Hx = (gtsam::Matrix(1, 3) << losvec_.transpose()).finished();
-    if (Hc) *Hc = (gtsam::Matrix(1, 7) << hc.transpose()).finished();
+    if (Hc) *Hc = (gtsam::Matrix(1, nc) << hc.transpose()).finished();
 
     return error;
   }

@@ -28,14 +28,14 @@ public:
    * @brief Constructor
    * @param keyX1   3D position (X) key at time t1, X has 3 dimension
    * @param keyX2   3D position (X) key at time t2, X has 3 dimension
-   * @param keyC1   Receiver clock (C) key at time t1, C has 7 dimension
-   * @param keyC2   Receiver clock (C) key at time t2, C has 7 dimension
+   * @param keyC1   Receiver clock (C) key at time t1, C has Nc dimension
+   * @param keyC2   Receiver clock (C) key at time t2, C has Nc dimension
    * @param losvec  Line-of-Sight vector (3 dimension)
    * @param prr     Average Doppler residual between times t1 and t2 at initial 3D velocity (1 dimension), (prr1+prr2)/2
    * @param dt      Time interval (t2-t1)
    * @param inix1   Initial 3D position at time t1 when calculating residual (3 dimension)
    * @param inix2   Initial 3D position at time t2 when calculating residual (3 dimension)
-   * @param model   Gaussian noise model (3 dimension)
+   * @param model   Gaussian noise model (1 dimension)
    */
   DopplerFactor_XXCC(gtsam::Key keyX1,
                      gtsam::Key keyX2,
@@ -62,8 +62,9 @@ public:
                               gtsam::OptionalMatrixType Hc1,
                               gtsam::OptionalMatrixType Hc2) const override {
     // Estimate receiver clock change (first dimension)
-    gtsam::Vector7 hc;
-    hc << 1, 0, 0, 0, 0, 0, 0;
+    size_t nc = c1.size();
+    gtsam::Vector hc = gtsam::Vector::Zero(nc);
+    hc(0) = 1;
 
     // Compute error
     gtsam::Vector1 error;
@@ -73,8 +74,8 @@ public:
     // Jacobian
     if (Hx1) *Hx1 = (gtsam::Matrix(1, 3) << -losvec_.transpose() / dt_).finished();
     if (Hx2) *Hx2 = (gtsam::Matrix(1, 3) << losvec_.transpose() / dt_).finished();
-    if (Hc1) *Hc1 = (gtsam::Matrix(1, 7) << -hc.transpose()).finished();
-    if (Hc2) *Hc2 = (gtsam::Matrix(1, 7) << hc.transpose()).finished();
+    if (Hc1) *Hc1 = (gtsam::Matrix(1, nc) << -hc.transpose()).finished();
+    if (Hc2) *Hc2 = (gtsam::Matrix(1, nc) << hc.transpose()).finished();
 
     return error;
   }
