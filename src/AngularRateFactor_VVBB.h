@@ -23,8 +23,8 @@ public:
    * @brief Constructor
    * @param keyV1   3D velocity (V) key at time t1, V has 3 dimension
    * @param keyV2   3D velocity (V) key at time t2, V has 3 dimension
-   * @param keyB1   Receiver clock drift (D) key at time t1, D has 1 dimension
-   * @param keyB2   Receiver clock drift (D) key at time t2, D has 1 dimension
+   * @param keyB1   Magnitude of angular rate bias (B) key at time t1, B has 1 dimension
+   * @param keyB2   Magnitude of angular rate bias (B) key at time t2, B has 1 dimension
    * @param axang   Angle change computed from angular rate (1 dimension)
    */
   AngularRateFactor_VVBB(

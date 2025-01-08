@@ -28,7 +28,7 @@ public:
    * @param losvec  Line-of-Sight vector (3 dimension)
    * @param prr     Doppler (pseudorange rate) residual at initial 3D velocity (1 dimension)
    * @param iniv    Initial 3D velocity (3 dimension)
-   * @param model   Gaussian noise model (3 dimension)
+   * @param model   Gaussian noise model (1 dimension)
    */
   DopplerFactor_VD(gtsam::Key keyV,
                    gtsam::Key keyD,

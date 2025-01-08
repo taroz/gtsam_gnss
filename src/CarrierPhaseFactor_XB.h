@@ -34,7 +34,7 @@ public:
    * @param biasidx Carrier phase bias index from 0 up to Nbias (1 dimension)
    * @param lam     Wave length (1 dimension)
    * @param inix    Initial 3D position when calculating residual (3 dimension)
-   * @param model   Gaussian noise model (3 dimension)
+   * @param model   Gaussian noise model (1 dimension)
    */
   CarrierPhaseFactor_XB(gtsam::Key keyX,
                         gtsam::Key keyB,

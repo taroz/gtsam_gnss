@@ -28,7 +28,7 @@ public:
    * @param losvec  Line-of-Sight vector (3 dimension)
    * @param pr      Pseudorange residual at initial 3D position (1 dimension)
    * @param inix    Initial 3D position when calculating residual (3 dimension)
-   * @param model   Gaussian noise model (3 dimension)
+   * @param model   Gaussian noise model (1 dimension)
    */
     PseudorangeFactor_X(gtsam::Key keyX,
                         const gtsam::Vector& losvec,

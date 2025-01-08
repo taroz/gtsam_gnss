@@ -25,8 +25,8 @@ public:
    * @brief Constructor
    * @param keyV1   3D velocity (V) key at time t1, V has 3 dimension
    * @param keyV2   3D velocity (V) key at time t2, V has 3 dimension
-   * @param keyB1   Receiver clock drift (D) key at time t1, D has 1 dimension
-   * @param keyB2   Receiver clock drift (D) key at time t2, D has 1 dimension
+   * @param keyB1   Magnitude of acceleration bias (B) key at time t1, B has 1 dimension
+   * @param keyB2   Magnitude of acceleration bias (B) key at time t2, B has 1 dimension
    * @param g       Gravity acceleration (1 dimension)
    * @param dt      Time interval (t2-t1)
    * @param acc3d   Magnitude of average acceleration between time t1 and t2 (1 dimension)

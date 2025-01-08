@@ -31,7 +31,7 @@ public:
    * @param tdcp    TDCP measurement (meter) (1 dimension)
    * @param inix1   Initial 3D position at time t1 when calculating residual (3 dimension)
    * @param inix2   Initial 3D position at time t2 when calculating residual (3 dimension)
-   * @param model   Gaussian noise model (3 dimension)
+   * @param model   Gaussian noise model (1 dimension)
    */
   TDCPFactor_XX(gtsam::Key keyX1,
                 gtsam::Key keyX2,

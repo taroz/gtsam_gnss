@@ -34,7 +34,7 @@ public:
    * @param dt      Time interval (t2-t1)
    * @param iniv1   Initial 3D velocity at time t1 when calculating residual (3 dimension)
    * @param iniv2   Initial 3D velocity at time t2 when calculating residual (3 dimension)
-   * @param model   Gaussian noise model (3 dimension)
+   * @param model   Gaussian noise model (1 dimension)
    */
   TDCPFactor_VVDD(gtsam::Key keyV1,
                   gtsam::Key keyV2,
