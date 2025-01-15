@@ -42,7 +42,7 @@ public:
 
     // Jacobian
     if (Hp) *Hp = Hpose_P;
-    if (Hx) *Hx = -gtsam::Matrix33::Identity();
+    if (Hx) *Hx = -gtsam::I_3x3;
 
     return error;
   }

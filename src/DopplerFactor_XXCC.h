@@ -61,15 +61,16 @@ public:
                               gtsam::OptionalMatrixType Hx2,
                               gtsam::OptionalMatrixType Hc1,
                               gtsam::OptionalMatrixType Hc2) const override {
-    // Estimate receiver clock change (first dimension)
+    // Compute error
+    gtsam::Vector dx = ((x2 - inix2_) - (x1 - inix1_)) / dt_;
+    gtsam::Vector dc = (c2 - c1) / dt_;
+    
     size_t nc = c1.size();
     gtsam::Vector hc = gtsam::Vector::Zero(nc);
     hc(0) = 1;
 
-    // Compute error
     gtsam::Vector1 error;
-    Vector v = ((x2 - inix2_) - (x1 - inix1_)) / dt_;
-    error << (losvec_.transpose() * v + hc.transpose() * (c2 - c1)).value() - prr_;
+    error << (losvec_.transpose() * dx + hc.transpose() * dc).value() - prr_;
 
     // Jacobian
     if (Hx1) *Hx1 = (gtsam::Matrix(1, 3) << -losvec_.transpose() / dt_).finished();

@@ -56,8 +56,8 @@ public:
     // Jacobian
     if (Hx1) *Hx1 = -gtsam::I_3x3;
     if (Hx2) *Hx2 =  gtsam::I_3x3;
-    if (Hv1) *Hv1 = -dt_ / 2 * gtsam::Matrix33::Identity();
-    if (Hv2) *Hv2 = -dt_ / 2 * gtsam::Matrix33::Identity();
+    if (Hv1) *Hv1 = -dt_ / 2 * gtsam::I_3x3;
+    if (Hv2) *Hv2 = -dt_ / 2 * gtsam::I_3x3;
 
     return error;
   }
