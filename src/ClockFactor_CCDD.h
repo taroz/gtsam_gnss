@@ -22,12 +22,12 @@ private:
 public:
   /**
    * @brief Constructor
-   * @param keyC1   Receiver clock (C) key at time t1, C has 7 dimension
-   * @param keyC2   Receiver clock (C) key at time t2, C has 7 dimension
+   * @param keyC1   Receiver clock (C) key at time t1, C has Nc dimension
+   * @param keyC2   Receiver clock (C) key at time t2, C has Nc dimension
    * @param keyD1   Receiver clock drift (D) key at time t1, D has 1 dimension
    * @param keyD2   Receiver clock drift (D) key at time t2, D has 1 dimension
    * @param dt      Time interval (t2-t1)
-   * @param model   Gaussian noise model (3 dimension)
+   * @param model   Gaussian noise model (nc dimension)
    */
   ClockFactor_CCDD(gtsam::Key keyC1, gtsam::Key keyC2, gtsam::Key keyD1, gtsam::Key keyD2, const double& dt, const gtsam::SharedNoiseModel& model)
   : Base(model, keyC1, keyC2, keyD1, keyD2), dt_(dt) {};
@@ -45,14 +45,20 @@ public:
                               gtsam::OptionalMatrixType Hd1,
                               gtsam::OptionalMatrixType Hd2) const override {
     // Compute error
-    gtsam::Vector1 error;
-    error << (c2[0] - c1[0]) - ((d1[0] + d2[0]) * dt_ / 2);
+    size_t nc = c1.size();
+
+    gtsam::Vector error = gtsam::Vector::Zero(nc);
+    error << c2 - c1;
+    error(0) -= (d1[0] + d2[0]) * dt_ / 2;
+
+    gtsam::Matrix hd = gtsam::Matrix::Zero(nc, 1);
+    hd(0) = -dt_ / 2;
 
     // Jacobian
-    if (Hc1) *Hc1 = (gtsam::Matrix(1, 7) << -1, 0, 0, 0, 0, 0, 0).finished();
-    if (Hc2) *Hc2 = (gtsam::Matrix(1, 7) << 1, 0, 0, 0, 0, 0, 0).finished();
-    if (Hd1) *Hd1 = (gtsam::Matrix(1, 1) << -dt_ / 2).finished();
-    if (Hd2) *Hd2 = (gtsam::Matrix(1, 1) << -dt_ / 2).finished();
+    if (Hc1) *Hc1 = -gtsam::Matrix::Identity(nc, nc);
+    if (Hc2) *Hc2 =  gtsam::Matrix::Identity(nc, nc);
+    if (Hd1) *Hd1 = hd;
+    if (Hd2) *Hd2 = hd;
 
     return error;
   }
