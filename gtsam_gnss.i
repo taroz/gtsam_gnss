@@ -64,15 +64,6 @@ virtual class TDCPFactor_XXCC : gtsam::NoiseModelFactor {
   const double& measurementIn() const;
 };
 
-// Time-difference Carrier Phase (TDCP) factor with 3D velocities (V) and receiver clock drifts (D)
-#include <TDCPFactor_VVDD.h>
-virtual class TDCPFactor_VVDD : gtsam::NoiseModelFactor {
-  TDCPFactor_VVDD(size_t keyV1, size_t keyV2, size_t keyD1, size_t keyD2, const gtsam::Vector& losvec, const double& tdcp, const double& dt, const gtsam::Vector& iniv1, const gtsam::Vector& iniv2, gtsam::noiseModel::Base* model);
-  gtsam::Vector evaluateError(const gtsam::Vector& v1, const gtsam::Vector& v2, const gtsam::Vector& d1, const gtsam::Vector& d2) const;
-  void print(string s = "", const gtsam::KeyFormatter& keyFormatter = gtsam::DefaultKeyFormatter) const;
-  const double& measurementIn() const;
-};
-
 // Time-difference Carrier Phase (TDCP) factor with 3D positions (X)
 #include <TDCPFactor_XX.h>
 virtual class TDCPFactor_XX : gtsam::NoiseModelFactor {
@@ -85,7 +76,7 @@ virtual class TDCPFactor_XX : gtsam::NoiseModelFactor {
 // Time-difference Carrier Phase (TDCP) factor with 3D positions (X) and receiver clock drifts (D)
 #include <TDCPFactor_XXDD.h>
 virtual class TDCPFactor_XXDD : gtsam::NoiseModelFactor {
-  TDCPFactor_XXDD(size_t keyX1, size_t keyX2, size_t keyD1, size_t keyD2, const gtsam::Vector& losvec, const double& tdcp, const gtsam::Vector& inix1, const gtsam::Vector& inix2, gtsam::noiseModel::Base* model);
+  TDCPFactor_XXDD(size_t keyX1, size_t keyX2, size_t keyD1, size_t keyD2, const gtsam::Vector& losvec, const double& tdcp, const double& dt, const gtsam::Vector& inix1, const gtsam::Vector& inix2, gtsam::noiseModel::Base* model);
   gtsam::Vector evaluateError(const gtsam::Vector& x1, const gtsam::Vector& x2, const gtsam::Vector& d1, const gtsam::Vector& d2) const;
   void print(string s = "", const gtsam::KeyFormatter& keyFormatter = gtsam::DefaultKeyFormatter) const;
   const double& measurementIn() const;
@@ -96,6 +87,14 @@ virtual class TDCPFactor_XXDD : gtsam::NoiseModelFactor {
 virtual class MotionFactor_XXVV : gtsam::NoiseModelFactor {
   MotionFactor_XXVV(size_t keyX1, size_t keyX2, size_t keyV1, size_t keyV2, const double& dt, gtsam::noiseModel::Base* model);
   gtsam::Vector evaluateError(const gtsam::Vector& x1, const gtsam::Vector& x2, const gtsam::Vector& v1, const gtsam::Vector& v2) const;
+  void print(string s = "", const gtsam::KeyFormatter& keyFormatter = gtsam::DefaultKeyFormatter) const;
+};
+
+// Clock factor with receiver clocks (C)
+#include <ClockFactor_CC.h>
+virtual class ClockFactor_CC : gtsam::NoiseModelFactor {
+  ClockFactor_CC(size_t keyC1, size_t keyC2, gtsam::noiseModel::Base* model);
+  gtsam::Vector evaluateError(const gtsam::Vector& c1, const gtsam::Vector& c2) const;
   void print(string s = "", const gtsam::KeyFormatter& keyFormatter = gtsam::DefaultKeyFormatter) const;
 };
 
