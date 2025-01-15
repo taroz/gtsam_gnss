@@ -23,4 +23,9 @@ matlab
 /path/to/MatlabProgressBar
 ```
 # Examples
-- `estimate_pos.m`: Estimate position and receiver clock using `PseudorangeFactor_XC`
+- `estimate_pos_P.m`: Estimate position (x) and receiver clock (c) using `PseudorangeFactor_XC` and `ClockFactor_CC`
+- `estimate_pos_PD.m`: Estimate position (x) and receiver clock (c) using `PseudorangeFactor_XC`, `ClockFactor_CC`, and `DopplerFactor_XXCC`
+- `estimate_pos_PDC.m`: Estimate position (x) and receiver clock (c) using `PseudorangeFactor_XC`, `ClockFactor_CC`, `DopplerFactor_XXCC`, and `TDCPFactor_XXCC`
+- `estimate_posvel_PD.m`: Estimate position (x), velocity (v), receiver clock (c), and receiver clock drift (d) using `PseudorangeFactor_XC`, `DopplerFactor_VD`, `MotionFactor_XXVV`, and `ClockFactor_CCDD`
+- `estimate_posvel_PDC.m`: Estimate position (x), velocity (v), receiver clock (c), and receiver clock drift (d) using `PseudorangeFactor_XC`, `DopplerFactor_VD`, `MotionFactor_XXVV`, `ClockFactor_CCDD`, and `TDCPFactor_XXCC`
+- `estimate_vel_D.m`: Estimate velocity (v) and receiver clock drift (d) using `DopplerFactor_VD`
