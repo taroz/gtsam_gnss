@@ -17,6 +17,7 @@ class TDCPFactor_XXDD : public gtsam::NoiseModelFactorN<gtsam::Vector, gtsam::Ve
 private:
   gtsam::Vector losvec_;
   double tdcp_;
+  double dt_;
   gtsam::Vector inix1_;
   gtsam::Vector inix2_;
   typedef gtsam::NoiseModelFactorN<gtsam::Vector, gtsam::Vector, gtsam::Vector, gtsam::Vector> Base;
@@ -30,6 +31,7 @@ public:
    * @param keyD2   Receiver clock drift (D) key at time t2, D has 1 dimension
    * @param losvec  Line-of-Sight vector (3 dimension)
    * @param tdcp    TDCP measurement (meter) (1 dimension)
+   * @param dt      Time interval (t2-t1)
    * @param inix1   Initial 3D position at time t1 when calculating residual (3 dimension)
    * @param inix2   Initial 3D position at time t2 when calculating residual (3 dimension)
    * @param model   Gaussian noise model (1 dimension)
@@ -40,10 +42,11 @@ public:
                   gtsam::Key keyD2,
                   const gtsam::Vector& losvec,
                   const double& tdcp,
+                  const double& dt,
                   const gtsam::Vector& inix1,
                   const gtsam::Vector& inix2,
                   const gtsam::SharedNoiseModel& model)
-  : Base(model, keyX1, keyX2, keyD1, keyD2), losvec_(losvec), tdcp_(tdcp), inix1_(inix1), inix2_(inix2) {};
+  : Base(model, keyX1, keyX2, keyD1, keyD2), losvec_(losvec), tdcp_(tdcp), dt_(dt), inix1_(inix1), inix2_(inix2) {};
 
   ~TDCPFactor_XXDD() override {}
 
@@ -60,15 +63,15 @@ public:
 
     // Compute error
     gtsam::Vector dx = (x2 - inix2_) - (x1 - inix1_);
-    gtsam::Vector dc = (d1 + d2) / 2;
+    gtsam::Vector dc = dt_ * (d1 + d2) / 2;
 
     gtsam::Vector1 error;
     error << (losvec_.transpose() * dx + dc).value() - tdcp_;
 
     if (Hx1) *Hx1 = (gtsam::Matrix(1, 3) << -losvec_.transpose()).finished();
     if (Hx2) *Hx2 = (gtsam::Matrix(1, 3) << losvec_.transpose()).finished();
-    if (Hd1) *Hd1 = (gtsam::Matrix(1, 1) << 0.5).finished();
-    if (Hd2) *Hd2 = (gtsam::Matrix(1, 1) << 0.5).finished();
+    if (Hd1) *Hd1 = (gtsam::Matrix(1, 1) << dt_ / 2).finished();
+    if (Hd2) *Hd2 = (gtsam::Matrix(1, 1) << dt_ / 2).finished();
 
     return error;
   }
