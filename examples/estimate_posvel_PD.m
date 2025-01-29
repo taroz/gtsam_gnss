@@ -142,10 +142,10 @@ for i=progress(1:n)
         % Pseudorange factor
         if ~isnan(obs.L1.resPc(i,j))
             noise = noise_sigmas(sigmaP(i,j)); % Noise model
-            noise_rubust = noise_robust(huber(huber_P), noise); % Robust noise model
+            noise_robust_P = noise_robust(huber(huber_P), noise); % Robust noise model
 
             % Add pseudorange factor
-            graph.add(gtsam_gnss.PseudorangeFactor_XC(sym('x',i), sym('c',i), losvec, obs.L1.resPc(i,j), sys2sigtype(obs.sys(j)), x_ini(i,:)', noise_rubust));
+            graph.add(gtsam_gnss.PseudorangeFactor_XC(sym('x',i), sym('c',i), losvec, obs.L1.resPc(i,j), sys2sigtype(obs.sys(j)), x_ini(i,:)', noise_robust_P));
         end
 
         % Doppler factor
