@@ -5,6 +5,7 @@
 clear; close all;
 
 %% Path
+addpath ./function
 if ispc
     addpath C:\'Program Files (x86)'\GTSAM\gtsam_toolbox\
 else
