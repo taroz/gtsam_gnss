@@ -5,7 +5,7 @@ This repository is a small set of custom factors and MATLAB wrappers that use [G
 
 ## Updates
 ### February 13, 2025
-[The preprint of the paper](https://arxiv.org/abs/2502.08158) has been uploaded. Examples (`paper_example1_robust_error_model.m` and `paper_example2_ambiguity_resolution.m`) in the paper are now available. Also, examples of the use of `CarrierPhaseFactor_XB` to estimate carrier phase ambiguity have been added.
+[The preprint of the paper](https://arxiv.org/abs/2502.08158) has been uploaded. Examples in the paper are now available. Also, examples of the use of `CarrierPhaseFactor_XB` to estimate carrier phase integer ambiguity have been added.
 
 # Test environments
 - Ubuntu 22.04 / Windows 11 /macOS
@@ -27,7 +27,7 @@ sudo make install
 ```
 `gtsam_toolbox` is installed in `/usr/local/`
 
-## gtsam-gnss
+## gtsam_gnss
 ```shell
 git clone https://github.com/taroz/gtsam_gnss.git
 cd gtsam_gnss
