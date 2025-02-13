@@ -1,8 +1,11 @@
-function sigtype = sys2sigtype(sys,freq)
+function sigtype = sys2sigtype(sys, freq)
+% Converts satellite system and frequency to signal type index
+% Author: Taro Suzuki
 arguments
-    sys 
-    freq = "L1" 
+    sys         % Satellite system (gt.C.SYS_XXX)
+    freq = "L1" % "L1" or "L2" or "L5"
 end
+
 if isscalar(freq)
     freq = repmat(freq,size(sys));
 end
