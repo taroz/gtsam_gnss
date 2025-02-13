@@ -3,6 +3,10 @@ This repository is a small set of custom factors and MATLAB wrappers that use [G
 
 <u>This repository is currently under development</u>, so we will gradually add content.
 
+## Updates
+### February 13, 2025
+[The preprint of the paper](https://arxiv.org/abs/2502.08158) has been uploaded. Examples (`paper_example1_robust_error_model.m` and `paper_example2_ambiguity_resolution.m`) in the paper are now available.
+
 # Test environments
 - Ubuntu 22.04 / Windows 11 /macOS
 - MATLAB 2024a
@@ -47,6 +51,7 @@ The procedure for building GTSAM and gtsam_gnss on macOS is shown [here](./BUILD
 - Use in the Google Smartphone Decimeter Challenge. See [gsdc2023](https://github.com/taroz/gsdc2023) repository
 
 # Citation
+The preprint version is [here](https://arxiv.org/abs/2502.08158).
 ```
 T. Suzuki, "Open-Source Factor Graph Optimization Package for GNSS: Examples and Applications," 2025 IEEE/ION Position, Location and Navigation Symposium (PLANS), (accepted)
 ```
