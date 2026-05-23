@@ -132,4 +132,62 @@ virtual class AngularRateFactor_VVBB : gtsam::NoiseModelFactor {
   const double& measurementIn() const;
 };
 
+// Switch State
+#include <SwitchVariable.h>
+class SwitchVariable {
+  // Constructors
+  SwitchVariable();
+  SwitchVariable(double s);
+  double value() const;
+  void print(const string s = "") const;
+};
+
+// Values utility functions for Switch Variable
+void insertSwitchVariable(size_t key, const gtsam_gnss::SwitchVariable& s, gtsam::Values& values);
+gtsam_gnss::SwitchVariable atSwitchVariable(size_t key, const gtsam::Values& values);
+
+// Prior factor of Switch Variable
+#include <PriorFactorSwitchVariable.h>
+virtual class PriorFactorSwitchVariable : gtsam::NoiseModelFactor {
+  PriorFactorSwitchVariable(size_t key, const gtsam_gnss::SwitchVariable& prior, gtsam::noiseModel::Base* model);
+  void print(string s = "", const gtsam::KeyFormatter& keyFormatter = gtsam::DefaultKeyFormatter) const;
+  const gtsam_gnss::SwitchVariable& prior();
+};
+
+// Between factor of Switch Variable
+#include <BetweenFactorSwitchVariable.h>
+virtual class BetweenFactorSwitchVariable : gtsam::NoiseModelFactor {
+  BetweenFactorSwitchVariable(size_t keyS1, size_t keyS2, const double& measured, gtsam::noiseModel::Base* model);
+  void print(string s = "", const gtsam::KeyFormatter& keyFormatter = gtsam::DefaultKeyFormatter) const;
+  const gtsam_gnss::SwitchVariable& measured();
+};
+
+// Pseudorange factor with 3D position (X) and Switch Variable (S)
+#include <SC_PseudorangeFactor_X.h>
+virtual class SC_PseudorangeFactor_X : gtsam::NoiseModelFactor {
+  SC_PseudorangeFactor_X(size_t keyX, size_t keyS, const gtsam::Vector& losvec, const double& pr, const gtsam::Vector& inix, gtsam::noiseModel::Base* model);
+  gtsam::Vector evaluateError(const gtsam::Vector& x, const gtsam_gnss::SwitchVariable& s) const;
+  void print(string str = "", const gtsam::KeyFormatter& keyFormatter = gtsam::DefaultKeyFormatter) const;
+  const double& measurementIn() const;
+};
+
+// Doppler factor with 3D velocity (V) and Switch Variable (S)
+#include <SC_DopplerFactor_V.h>
+virtual class SC_DopplerFactor_V : gtsam::NoiseModelFactor {
+  SC_DopplerFactor_V(size_t keyV, size_t keyS, const gtsam::Vector& losvec, const double& prr, const gtsam::Vector& iniv, gtsam::noiseModel::Base* model);
+  gtsam::Vector evaluateError(const gtsam::Vector& v, const gtsam_gnss::SwitchVariable& s) const;
+  void print(string str = "", const gtsam::KeyFormatter& keyFormatter = gtsam::DefaultKeyFormatter) const;
+  const double& measurementIn() const;
+};
+
+// Carrier phase factor with 3D position (X) and carrier phase bias (B) and Switch Variable (S)
+#include <SC_CarrierPhaseFactor_XB.h>
+virtual class SC_CarrierPhaseFactor_XB : gtsam::NoiseModelFactor {
+  SC_CarrierPhaseFactor_XB(size_t keyX, size_t keyB, size_t keyS, const gtsam::Vector& losvec, const double& cp, const int& biasidx, const double& lam, const gtsam::Vector& inix, gtsam::noiseModel::Base* model);
+  SC_CarrierPhaseFactor_XB(size_t keyX, size_t keyB, size_t keyS, const gtsam::Vector& losvec, const double& cp, const int& biasidx, const int& refbiasidx, const double& lam, const gtsam::Vector& inix, gtsam::noiseModel::Base* model);
+  gtsam::Vector evaluateError(const gtsam::Vector& x, const gtsam::Vector& b, const gtsam_gnss::SwitchVariable& s) const;
+  void print(string str = "", const gtsam::KeyFormatter& keyFormatter = gtsam::DefaultKeyFormatter) const;
+  const double& measurementIn() const;
+};
+
 }
